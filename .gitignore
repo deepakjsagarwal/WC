@@ -2,3 +2,5 @@ temp*
 .ipynb_checkpoints/
 result*
 my_dir
+result_summary
+*.txt
