@@ -4,3 +4,5 @@ result*
 my_dir
 result_summary
 *.txt
+dataset
+*.npy
