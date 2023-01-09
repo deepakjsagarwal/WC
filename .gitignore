@@ -6,3 +6,4 @@ result_summary
 *.txt
 dataset
 *.npy
+*.zip
