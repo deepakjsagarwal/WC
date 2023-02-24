@@ -235,7 +235,7 @@ test_dataset_label = np.array(test_dataset_label)
 import tensorflow as tf
 import matplotlib.pyplot as plt
 from tensorflow.keras import datasets, layers, models, losses, Model
-from tensorflow.keras.layers import Input, Conv2D, MaxPool2D, MaxPooling2D, Activation, Flatten, Dense, AveragePooling2D, GlobalAveragePooling2Dtensorflow.
+from tensorflow.keras.layers import Input, Conv2D, MaxPool2D, MaxPooling2D, Activation, Flatten, Dense, AveragePooling2D, GlobalAveragePooling2Dtensorflow
 from tensorflow.keras.layers.core import Dropout
 from tensorflow.keras.optimizers import Adam
 
