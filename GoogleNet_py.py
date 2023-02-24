@@ -9,20 +9,20 @@
 # !pip install spectral
 
 
-# In[1]:
+# In[22]:
 
 
 import tensorflow as tf
 
 
-# In[3]:
+# In[23]:
 
 
 # from tensorflow import keras as keras
 from tensorflow.keras import layers as layers
 
 
-# In[4]:
+# In[24]:
 
 
 import os, timeit
@@ -31,45 +31,45 @@ import numpy as np
 from math import inf as inf
 
 
-# In[5]:
+# In[25]:
 
 
 import pandas as pd
 
 
-# In[6]:
+# In[26]:
 
 
 from spectral.io import envi as envi
 from spectral import imshow
 
 
-# In[7]:
+# In[27]:
 
 
 from sklearn.decomposition import IncrementalPCA
 
 
-# In[8]:
+# In[28]:
 
 
 import sys
 
 
-# In[9]:
+# In[29]:
 
 
 # print("Num GPUs Available: ", len(tf.config.list_physical_devices('GPU')))
 
 
-# In[10]:
+# In[30]:
 
 
 # gpus = tf.config.experimental.list_physical_devices('GPU')
 # print(gpus)
 
 
-# In[11]:
+# In[31]:
 
 
 from sys import platform
@@ -83,7 +83,7 @@ elif platform == "win32":
     SLASH="\\"
 
 
-# In[ ]:
+# In[32]:
 
 
 #Constants
@@ -97,7 +97,7 @@ IMAGE_WIDTH = 30
 IMAGE_HEIGHT = 30
 
 
-# In[ ]:
+# In[14]:
 
 
 ACTIVATION_TYPE =  "relu"
@@ -106,7 +106,7 @@ EPOCHS = 100
 LEARNING_RATE_BASE = 0.0001
 
 
-# In[ ]:
+# In[15]:
 
 
 from enum import Enum
@@ -126,7 +126,7 @@ ORDER = 2
 DERIVATIVE = "none"
 
 
-# In[ ]:
+# In[16]:
 
 
 from enum import Enum
@@ -153,7 +153,7 @@ FIRST_BAND = 15
 LAST_BAND = 161
 
 
-# In[ ]:
+# In[17]:
 
 
 def start_timer():
@@ -168,7 +168,7 @@ def show_time(tic,toc):
     print('Testing time (s) = ' + str(test_time) + '\n')
 
 
-# In[ ]:
+# In[18]:
 
 
 # List for All varieties
@@ -184,7 +184,7 @@ for name in os.listdir(DATA_DIRECTORY):
         break
 
 
-# In[ ]:
+# In[19]:
 
 
 def dataset_file_name(variety):
@@ -200,13 +200,13 @@ def dataset_file_name(variety):
     return name
 
 
-# In[ ]:
+# In[20]:
 
 
 print(VARIETIES[:NUM_VARIETIES])
 
 
-# In[ ]:
+# In[21]:
 
 
 train_dataset = []
@@ -229,14 +229,14 @@ test_dataset = np.array(test_dataset)
 test_dataset_label = np.array(test_dataset_label)
 
 
-# In[ ]:
+# In[34]:
 
 
 import tensorflow as tf
 import matplotlib.pyplot as plt
 from tensorflow.keras import datasets, layers, models, losses, Model
-from tensorflow.keras.layers import Input, Conv2D, MaxPool2D, MaxPooling2D, Activation, Flatten, Dense, AveragePooling2D, GlobalAveragePooling2Dtensorflow
-from tensorflow.keras.layers.core import Dropout
+from tensorflow.keras.layers import Input, Conv2D, MaxPool2D, MaxPooling2D, Activation, Flatten, Dense, AveragePooling2D, GlobalAveragePooling2D
+from tensorflow.keras.layers import Dropout
 from tensorflow.keras.optimizers import Adam
 
 
