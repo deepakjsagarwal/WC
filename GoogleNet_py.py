@@ -9,20 +9,20 @@
 # !pip install spectral
 
 
-# In[ ]:
+# In[1]:
 
 
 import tensorflow as tf
 
 
-# In[ ]:
+# In[3]:
 
 
-from tensorflow import keras as keras
-from keras import layers as layers
+# from tensorflow import keras as keras
+from tensorflow.keras import layers as layers
 
 
-# In[ ]:
+# In[4]:
 
 
 import os, timeit
@@ -31,45 +31,45 @@ import numpy as np
 from math import inf as inf
 
 
-# In[ ]:
+# In[5]:
 
 
 import pandas as pd
 
 
-# In[ ]:
+# In[6]:
 
 
 from spectral.io import envi as envi
 from spectral import imshow
 
 
-# In[ ]:
+# In[7]:
 
 
 from sklearn.decomposition import IncrementalPCA
 
 
-# In[ ]:
+# In[8]:
 
 
 import sys
 
 
-# In[ ]:
+# In[9]:
 
 
 print("Num GPUs Available: ", len(tf.config.list_physical_devices('GPU')))
 
 
-# In[ ]:
+# In[10]:
 
 
 gpus = tf.config.experimental.list_physical_devices('GPU')
 print(gpus)
 
 
-# In[ ]:
+# In[11]:
 
 
 from sys import platform
@@ -235,9 +235,9 @@ test_dataset_label = np.array(test_dataset_label)
 import tensorflow as tf
 import matplotlib.pyplot as plt
 from tensorflow.keras import datasets, layers, models, losses, Model
-from keras.layers import Input, Conv2D, MaxPool2D, MaxPooling2D, Activation, Flatten, Dense, AveragePooling2D, GlobalAveragePooling2D
-from keras.layers.core import Dropout
-from keras.optimizers import Adam
+from tensorflow.keras.layers import Input, Conv2D, MaxPool2D, MaxPooling2D, Activation, Flatten, Dense, AveragePooling2D, GlobalAveragePooling2Dtensorflow.
+from tensorflow.keras.layers.core import Dropout
+from tensorflow.keras.optimizers import Adam
 
 
 # In[ ]:
