@@ -16,7 +16,7 @@ from sklearn.model_selection import GridSearchCV
 # In[9]:
 
 
-param_grid={'C':[100],'gamma':[0.1],'kernel':['rbf']}
+param_grid={'C':[100, 1000],'gamma':[0.1, 0.01],'kernel':['rbf']}
 
 
 # In[10]:
@@ -28,7 +28,7 @@ svc=svm.SVC(probability=True)
 # In[11]:
 
 
-model=GridSearchCV(svc,param_grid)
+model=GridSearchCV(svc,param_grid, refit = True, verbose = 3)
 
 
 # In[12]:
