@@ -9,20 +9,32 @@
 # !pip install spectral
 
 
-# In[22]:
+# In[2]:
+
+
+get_ipython().system('pip install --upgrade tensorflow==2.0.0')
+
+
+# In[ ]:
 
 
 import tensorflow as tf
 
 
-# In[23]:
+# In[ ]:
+
+
+tf.__version__
+
+
+# In[ ]:
 
 
 # from tensorflow import keras as keras
 from tensorflow.keras import layers as layers
 
 
-# In[24]:
+# In[ ]:
 
 
 import os, timeit
@@ -31,45 +43,45 @@ import numpy as np
 from math import inf as inf
 
 
-# In[25]:
+# In[ ]:
 
 
 import pandas as pd
 
 
-# In[26]:
+# In[ ]:
 
 
 from spectral.io import envi as envi
 from spectral import imshow
 
 
-# In[27]:
+# In[ ]:
 
 
 from sklearn.decomposition import IncrementalPCA
 
 
-# In[28]:
+# In[ ]:
 
 
 import sys
 
 
-# In[29]:
+# In[ ]:
 
 
 # print("Num GPUs Available: ", len(tf.config.list_physical_devices('GPU')))
 
 
-# In[30]:
+# In[ ]:
 
 
 # gpus = tf.config.experimental.list_physical_devices('GPU')
 # print(gpus)
 
 
-# In[31]:
+# In[ ]:
 
 
 from sys import platform
@@ -83,7 +95,7 @@ elif platform == "win32":
     SLASH="\\"
 
 
-# In[32]:
+# In[ ]:
 
 
 #Constants
@@ -91,13 +103,16 @@ BAND_NUMBER = 60
 FILLED_AREA_RATIO = 0.9
 TOTAL_IMAGE_COUNT = 2400
 IMAGE_COUNT = int(TOTAL_IMAGE_COUNT/4)
-NUM_VARIETIES = 8
+NUM_VARIETIES = 4
 
 IMAGE_WIDTH = 30
 IMAGE_HEIGHT = 30
 
+TRAIN_IMAGES = 1200
+TEST_IMAGES = 300
 
-# In[14]:
+
+# In[ ]:
 
 
 ACTIVATION_TYPE =  "relu"
@@ -106,7 +121,7 @@ EPOCHS = 100
 LEARNING_RATE_BASE = 0.0001
 
 
-# In[15]:
+# In[ ]:
 
 
 from enum import Enum
@@ -126,7 +141,7 @@ ORDER = 2
 DERIVATIVE = "none"
 
 
-# In[16]:
+# In[ ]:
 
 
 from enum import Enum
@@ -153,7 +168,7 @@ FIRST_BAND = 15
 LAST_BAND = 161
 
 
-# In[17]:
+# In[ ]:
 
 
 def start_timer():
@@ -168,7 +183,7 @@ def show_time(tic,toc):
     print('Testing time (s) = ' + str(test_time) + '\n')
 
 
-# In[18]:
+# In[ ]:
 
 
 # List for All varieties
@@ -184,7 +199,13 @@ for name in os.listdir(DATA_DIRECTORY):
         break
 
 
-# In[19]:
+# In[ ]:
+
+
+VARIETIES = ['DBW 187', 'DBW222', 'HD 3086', 'PBW 291']
+
+
+# In[ ]:
 
 
 def dataset_file_name(variety):
@@ -200,36 +221,38 @@ def dataset_file_name(variety):
     return name
 
 
-# In[20]:
+# In[ ]:
 
 
 print(VARIETIES[:NUM_VARIETIES])
 
 
-# In[21]:
+# In[ ]:
 
 
-train_dataset = []
-train_dataset_label = []
-test_dataset=[]
-test_dataset_label = []
+train_dataset = np.empty([0, IMAGE_HEIGHT, IMAGE_WIDTH, 168])
+train_dataset_label = np.empty([0,], dtype=int)
+test_dataset= np.empty([0, IMAGE_HEIGHT, IMAGE_WIDTH, 168])
+test_dataset_label = np.empty([0,], dtype=int)
 
 for idx, v in enumerate(VARIETIES):
     print("idx: ",idx)
     if idx >= NUM_VARIETIES:
         break
-    train_dataset= train_dataset + np.load(dataset_file_name(v)+"_train_dataset.npy").tolist()
-    train_dataset_label = train_dataset_label + np.load(dataset_file_name(v)+"_train_dataset_label.npy").tolist()
-    test_dataset = test_dataset + np.load(dataset_file_name(v)+"_test_dataset.npy").tolist()
-    test_dataset_label = test_dataset_label + np.load(dataset_file_name(v)+"_test_dataset_label.npy").tolist()
-    
-train_dataset = np.array(train_dataset)
-train_dataset_label = np.array(train_dataset_label)
-test_dataset = np.array(test_dataset)
-test_dataset_label = np.array(test_dataset_label)
+    train_dataset= np.concatenate((train_dataset, np.load(dataset_file_name(v)+"_train_dataset.npy")[:TRAIN_IMAGES]), axis =0)
+    train_dataset_label = np.concatenate((train_dataset_label, np.load(dataset_file_name(v)+"_train_dataset_label.npy")[:TRAIN_IMAGES]), axis =0)
+    test_dataset = np.concatenate((test_dataset, np.load(dataset_file_name(v)+"_test_dataset.npy")[:TEST_IMAGES]), axis =0)
+    test_dataset_label = np.concatenate((test_dataset_label, np.load(dataset_file_name(v)+"_test_dataset_label.npy")[:TEST_IMAGES]), axis =0)
 
 
-# In[34]:
+# In[ ]:
+
+
+x_train = train_dataset.reshape(train_dataset.shape[0], -1)
+y_train = train_dataset_label.reshape(train_dataset_label.shape[0])
+
+
+# In[ ]:
 
 
 import tensorflow as tf
