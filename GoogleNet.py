@@ -9,12 +9,6 @@
 # !pip install spectral
 
 
-# In[2]:
-
-
-get_ipython().system('pip install --upgrade tensorflow==2.0.0')
-
-
 # In[ ]:
 
 
