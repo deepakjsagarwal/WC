@@ -16,7 +16,7 @@ from sklearn.model_selection import GridSearchCV
 # In[9]:
 
 
-param_grid={'C':[100, 1000],'gamma':[0.1, 0.01],'kernel':['rbf']}
+param_grid={'C':[1000, 10000],'gamma':[0.01, 0.001],'kernel':['rbf']}
 
 
 # In[10]:
