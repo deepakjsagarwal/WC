@@ -311,7 +311,7 @@ def auxiliary_classifier(x,num_classes,activation_type='relu'):
 def GoogleNetModel(data_num_rows, data_num_cols, num_input_chans=1, num_classes=NUM_VARIETIES, activation_type='relu', dropout_rate=0.0):
 
     inp = Input(shape=(data_num_rows, data_num_cols, num_input_chans))
-    input_tensor = layers.experimental.preprocessing.Resizing(224, 224, interpolation="bilinear", input_shape=train_dataset.shape[1:])(inp)
+    input_tensor = tensorflow.keras.layers.experimental.preprocessing.Resizing(224, 224, interpolation="bilinear", input_shape=train_dataset.shape[1:])(inp)
     x = Conv2D(64,  7, strides=2, padding='same', activation=activation_type)(input_tensor)
     x = MaxPooling2D(3, strides=2)(x)
     x = Conv2D(64,  1, strides=1, padding='same', activation=activation_type)(x)
