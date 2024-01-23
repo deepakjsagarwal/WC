@@ -9,3 +9,4 @@ dataset
 *.zip
 *models
 csvs/
+*env
