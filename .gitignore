@@ -9,4 +9,8 @@ dataset
 *.zip
 *models
 csvs/
+
+*.jpg
+
+*.jog
 *env
